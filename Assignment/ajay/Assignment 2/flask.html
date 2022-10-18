@@ -1,0 +1,102 @@
+Flask,render_template,request,session,redirect,url_for,g,flash
+app=Flask(_name_)
+app.secret_key="123"
+class User:
+def _init_(self,id,username,password):
+self.id=id
+self.username=username
+self.password=password
+users=[]
+users.append(User(id=1,username='ajay',password='ajay@07'))
+users.append(User(id=2,username='divya',password='divya@122'))
+users.append(User(id=3,username='naveen',password='naveen@28'))
+@app.route("/",methods=['GET','POST'])
+def login():
+if request.method=='POST':
+uname=request.form['uname']
+upass = request.form['upass']
+for data in users:
+if data.username==uname and data.password==upass:
+session['userid']=data.id
+g.record=1
+return redirect(url_for('user'))
+else:
+g.record=0
+if g.record!=1:
+flash("Username or Password Mismatch...!!!",'danger')
+return redirect(url_for('login'))
+return render_template("login.html")
+@app.before_request
+def before_request():
+if 'userid' in session:
+for data in users:
+if data.id==session['userid']:
+g.user=data
+@app.route('/user')
+def user():
+if not g.user:
+return redirect(url_for('login'))
+@app.route('/logout')
+def logout():
+session.clear()
+return redirect(url_for('login'))
+if _name=='main_':
+app.run(debug=True)
+<html>
+<head>
+<title>User Page</title>
+<link rel="stylesheet"
+href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+<script
+src="{{url_for('static',filename='js/jquery.min.js')}}"></script>
+</head>
+<body>
+<div class="container">
+<div class="col-md-5">
+<h3 class="page-header text-info">User Page</h3>
+<h3 ><marquee behavior="scroll" direction="left">Welcome
+{{g.user.username}}</marquee></h3><hr>
+<h4><a href="{{url_for('logout')}}">Logout</a></h4>
+</div>
+</div>
+</body>
+</html>
+<html>
+<head>
+<title>Home</title>
+<link rel="stylesheet" href="h.css">
+</head>
+<body align="center" bgcolor="sky blue">
+<img src="C:\venv\templates\background.jpg" alt="back">
+<h1 align="center">
+<b>Smart Fassion Recommended System</b>
+</h1>
+<h1 align="center">Login Page</h1>
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category,message in messages %}
+<div class="alert alert-
+{{category}}">{{message}}</div>
+{% endfor %}
+% endwith %}
+<form method="POST" action="/" autocomplete="on">
+<div class="form-group">
+<label >Username</label>
+<input type="text" name="uname" class="form-control">
+</div>
+<div class="form-group">
+<label>Password</label>
+<input type="password" name="upass" class="formcontrol">
+</div>
+<div class="form-group">
+<input type="submit" Value="Login" class="btn btnprimary" color="blue">
+</div>
+</form>
+</.center>
+</body>
+</html>
+<script>
+$(document).ready(function(){
+$(".alert").hide(4000);
+});
+</script>
