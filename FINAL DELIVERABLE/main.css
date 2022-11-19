@@ -1,0 +1,104 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: sans-serif;
+    line-height: 1.5;
+}
+.wrapper{
+    width: 1170px;
+    margin: auto;
+}
+header{
+    background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(https://motionarray.imgix.net/preview-197716-p5SX7bomar-high_0014.jpg);
+    height: 100vh;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+}
+.nav-area{
+    float: left;
+    list-style: none;
+    margin-top: 300px;
+    margin-left: 30px;
+}
+
+.logo{
+    padding-top: 1rem;
+    padding-left: 0px;
+    float: left;
+    height: 100px;
+    width: 100px;
+}
+.logo img{
+    width: 100%;
+    padding: 15px 0;
+    border: 1.5px dashed white;
+}
+.welcome-text{
+    position: absolute;
+    width: 600px;
+    height: 300px;
+    text-align: center;
+    
+}
+.welcome-text h1{
+    text-align: left;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 25px;
+    padding: 33px 210px;
+}
+
+/*resposive*/
+
+@media (max-width:600px){
+    .wrapper {
+width: 100%;
+}
+.logo {
+float: none;
+width: 50%;
+text-align: center;
+margin: auto;
+}
+img {
+width: 100%;
+}
+.nav-area {
+float: none;
+margin-top: 0;
+}
+
+.nav-area {
+text-align: center;
+}
+    .welcome-text {
+width: 100%;
+height: auto;
+margin: 30% 0;
+}
+    .welcome-text h1 {
+font-size: 30px;
+}
+}
+.btn-group{
+    padding-right: 50px;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: bold;
+}
+.btn{
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.dropdown-item{
+    background-color: lightgrey;
+    color: darkviolet;
+    border: 1.5px solid darkolivegreen;
+    font-size: 18px;
+}
